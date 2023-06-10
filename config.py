@@ -30,15 +30,18 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 import os
 
+
 @hook.subscribe.startup_once
 def startup():
+    import subprocess
 
-    os.system("feh --bg-scale ~/Downloads/f38.jpg")
+    os.system("feh --bg-scale ~/Pictures/1920x1080.jpg")
     os.system("setxkbmap -option caps:swapescape")
     os.system('setxkbmap -layout us,ru -variant colemak, -option grp:alt_shift_toggle')
     os.system("xrandr --output HDMI-A-0 --mode 1920x1080 --rate 143.98")
     os.system("opera --new-window &")
     os.system("alacritty &")
+    subprocess.Popen(['telegram-desktop'])
 
 
 mod = "mod4"
@@ -53,12 +56,14 @@ keys = [
     # Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c -0 sset Master 1+ unmute")),
     Key([mod], "Left", lazy.layout.swap_column_left()),
     Key([mod], "Right", lazy.layout.swap_column_right()),
+    # Sound volume up/down
     Key([mod], "F2", lazy.spawn("amixer set Master 5%-")),
     Key([mod], "F3", lazy.spawn("amixer set Master 5%+")),
-    Key([mod], "B", lazy.spawn("opera")),
+    # Application launch
+    Key([mod], "t", lazy.spawn("telegram-desktop")),
+    Key([mod, "shift"], "b", lazy.spawn("opera")),
     Key([mod], "b", lazy.spawn("vivaldi")),
-    Key([mod], "minus", lazy.spawn("notify-send 'Volume down'")),
-    Key([mod], "plus", lazy.spawn("notify-send 'Volume up'")),
+    #
     Key([mod, "control"], "1", lazy.window.togroup("1")),
     Key([mod, "control"], "2", lazy.window.togroup("2")),
     Key([mod, "control"], "3", lazy.window.togroup("3")),
@@ -102,6 +107,8 @@ keys = [
 
 groups = [Group(i) for i in "123456789"]
 
+groups[3].matches = [Match(wm_class=["TelegramDesktop"])]
+
 for i in groups:
     keys.extend(
         [
@@ -128,7 +135,7 @@ for i in groups:
 
 layouts = [
     # layout.Columns(border_focus_stack=["#44475a", "#282a36"], border_width=2),
-    layout.Columns(border_focus="#44475a", border_width=2),
+    layout.Columns(border_focus="#44475a", border_normal="#00000000", border_width=1, margin=1),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
@@ -168,7 +175,7 @@ screens = [
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                # widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
                 widget.QuickExit(),
             ],
             24,
