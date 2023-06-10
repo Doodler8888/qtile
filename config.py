@@ -42,6 +42,8 @@ def startup():
     os.system("opera --new-window &")
     os.system("alacritty &")
     subprocess.Popen(['telegram-desktop'])
+    subprocess.Popen(['vivaldi'])
+    subprocess.Popen(['flameshot'])
 
 
 mod = "mod4"
@@ -60,6 +62,8 @@ keys = [
     Key([mod], "F2", lazy.spawn("amixer set Master 5%-")),
     Key([mod], "F3", lazy.spawn("amixer set Master 5%+")),
     # Application launch
+    Key([], "Print", lazy.spawn("/home/wurfkreuz/.config/qtile/flameshot.sh")),
+    # Key([], "Print", lazy.spawn("flameshot &")),
     Key([mod], "t", lazy.spawn("telegram-desktop")),
     Key([mod, "shift"], "b", lazy.spawn("opera")),
     Key([mod], "b", lazy.spawn("vivaldi")),
@@ -107,6 +111,7 @@ keys = [
 
 groups = [Group(i) for i in "123456789"]
 
+groups[2].matches = [Match(wm_class=["Vivaldi-stable"])]
 groups[3].matches = [Match(wm_class=["TelegramDesktop"])]
 
 for i in groups:
