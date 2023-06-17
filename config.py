@@ -59,14 +59,17 @@ keys = [
     Key([mod], "Left", lazy.layout.swap_column_left()),
     Key([mod], "Right", lazy.layout.swap_column_right()),
     # Sound volume up/down
-    Key([mod], "F2", lazy.spawn("amixer set Master 5%-")),
-    Key([mod], "F3", lazy.spawn("amixer set Master 5%+")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer set Master 5%+")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer set Master 5%-")),
+    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")),
     # Application launch
     Key([], "Print", lazy.spawn("/home/wurfkreuz/.config/qtile/flameshot.sh")),
     # Key([], "Print", lazy.spawn("flameshot &")),
     Key([mod], "t", lazy.spawn("telegram-desktop")),
     Key([mod, "shift"], "b", lazy.spawn("opera")),
     Key([mod], "b", lazy.spawn("vivaldi")),
+    Key([mod], "d", lazy.spawn("dolphin")),
+    Key([mod], "v", lazy.spawn("/opt/windscribe/Windscribe")),
     #
     Key([mod, "control"], "1", lazy.window.togroup("1")),
     Key([mod, "control"], "2", lazy.window.togroup("2")),
