@@ -38,7 +38,7 @@ def startup():
     os.system("feh --bg-scale ~/Pictures/1920x1080.jpg")
     os.system("setxkbmap -option caps:swapescape")
     os.system('setxkbmap -layout us,ru -variant colemak, -option grp:alt_shift_toggle')
-    os.system("xrandr --output HDMI-A-0 --mode 1920x1080 --rate 143.98")
+    os.system("xrandr --output HDMI-1 --mode 1920x1080 --rate 143.98")
     os.system("opera --new-window &")
     os.system("alacritty &")
     subprocess.Popen(['telegram-desktop'])
