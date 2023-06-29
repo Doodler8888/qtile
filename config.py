@@ -12,7 +12,7 @@ def startup():
     os.system("feh --bg-scale ~/Pictures/1920x1080.jpg")
     os.system("setxkbmap -option caps:swapescape")
     os.system('setxkbmap -layout us,ru -variant colemak, -option grp:alt_shift_toggle')
-    os.system("xrandr --output HDMI-1 --mode 1920x1080 --rate 143.98")
+    os.system("xrandr --output HDMI-A-0 --mode 1920x1080 --rate 143.98")
     os.system("opera --new-window &")
     os.system("alacritty &")
     subprocess.Popen(['telegram-desktop'])
@@ -22,6 +22,7 @@ def startup():
 
 mod = "mod4"
 terminal = guess_terminal()
+os.environ["BROWSER"] = "vivaldi"
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -33,8 +34,8 @@ keys = [
     Key([mod], "Left", lazy.layout.swap_column_left()),
     Key([mod], "Right", lazy.layout.swap_column_right()),
     # Sound volume up/down
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer set Master 5%+")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer set Master 5%-")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")),
     Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")),
     # Application launch
     Key([], "Print", lazy.spawn("/home/wurfkreuz/.config/qtile/flameshot.sh")),
