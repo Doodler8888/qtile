@@ -16,13 +16,13 @@ def startup():
     os.system("opera --new-window &")
     os.system("alacritty &")
     subprocess.Popen(['telegram-desktop'])
-    subprocess.Popen(['vivaldi'])
+    subprocess.Popen(['vivaldi-stable'])
     subprocess.Popen(['flameshot'])
 
 
 mod = "mod4"
 terminal = guess_terminal()
-os.environ["BROWSER"] = "vivaldi"
+# os.environ["BROWSER"] = "vivaldi-stable"
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -31,6 +31,7 @@ keys = [
     # Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
     # Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c -0 sset Master 1- unmute")),
     # Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c -0 sset Master 1+ unmute")),
+    Key([mod], "Home", lazy.spawn("scrot /tmp/screenshot.png -e 'convert $f png:- | xclip -selection clipboard -t image/png -i; rm $f'")),
     Key([mod], "Left", lazy.layout.swap_column_left()),
     Key([mod], "Right", lazy.layout.swap_column_right()),
     # Sound volume up/down
@@ -42,7 +43,7 @@ keys = [
     # Key([], "Print", lazy.spawn("flameshot &")),
     Key([mod], "t", lazy.spawn("telegram-desktop")),
     Key([mod, "shift"], "b", lazy.spawn("opera")),
-    Key([mod], "b", lazy.spawn("vivaldi")),
+    Key([mod], "b", lazy.spawn("vivaldi-stable")),
     Key([mod], "d", lazy.spawn("dolphin")),
     Key([mod], "v", lazy.spawn("/opt/windscribe/Windscribe")),
     #
